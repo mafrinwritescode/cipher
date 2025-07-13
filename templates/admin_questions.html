@@ -1,0 +1,60 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="bg-white p-4 shadow-lg rounded">
+        <h4 class="text-primary fw-bold mb-3">📖 Manage Questions for Quiz: "{{ quiz.name }}"</h4>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Total Questions: <strong>{{ questions|length }}</strong></span>
+            <a href="{{ url_for('admin_add_question', quiz_id=quiz.id) }}" class="btn btn-success btn-sm px-3 py-1">
+                ➕ Add Question
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered text-center align-middle" style="width: 100%; table-layout: fixed;">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th style="width: 30%;">❓ Question</th>
+                        <th style="width: 15%;">🔹 Option 1</th>
+                        <th style="width: 15%;">🔹 Option 2</th>
+                        <th style="width: 15%;">🔹 Option 3</th>
+                        <th style="width: 15%;">🔹 Option 4</th>
+                        <th style="width: 10%;">✅ Correct</th>
+                        <th style="width: 10%;">⚙ Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for question in questions %}
+                    <tr style="height: 60px;">
+                        <td class="fw-semibold text-start p-3">{{ question.question_statement }}</td>
+                        <td class="p-3">{{ question.option1 }}</td>
+                        <td class="p-3">{{ question.option2 }}</td>
+                        <td class="p-3">{{ question.option3 }}</td>
+                        <td class="p-3">{{ question.option4 }}</td>
+                        <td class="fw-bold text-success p-3">Option {{ question.correct_option }}</td>
+                        <td class="p-3">
+                            <a href="{{ url_for('admin_edit_question', question_id=question.id) }}" class="btn btn-warning btn-sm px-2 py-0">
+                                ✏
+                            </a>
+                            <form method="POST" action="{{ url_for('admin_delete_question', question_id=question.id) }}" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm px-2 py-0" onclick="return confirm('Are you sure?');">
+                                    🗑
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary btn-sm px-3 py-1">
+                🔙 Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

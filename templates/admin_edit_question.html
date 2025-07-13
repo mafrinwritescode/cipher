@@ -1,0 +1,65 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="bg-white p-4 shadow-lg rounded mx-auto" style="max-width: 800px;">
+        <h4 class="text-primary fw-bold mb-3">✏ Edit Question</h4>
+
+        <form method="POST">
+            <!-- Question Statement -->
+            <div class="mb-3">
+                <label for="question_statement" class="form-label fw-bold">Question Statement:</label>
+                <input type="text" name="question_statement" class="form-control" 
+                    value="{{ question.question_statement }}" required 
+                    placeholder="Enter the question">
+            </div>
+
+            <!-- Options with Labels & Placeholders -->
+            <label class="form-label fw-bold">Options:</label>
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <label class="form-label">Option 1:</label>
+                    <input type="text" name="option1" class="form-control" 
+                        value="{{ question.option1 }}" required 
+                        placeholder="Enter Option 1">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Option 2:</label>
+                    <input type="text" name="option2" class="form-control" 
+                        value="{{ question.option2 }}" required 
+                        placeholder="Enter Option 2">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Option 3:</label>
+                    <input type="text" name="option3" class="form-control" 
+                        value="{{ question.option3 }}" required 
+                        placeholder="Enter Option 3">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Option 4:</label>
+                    <input type="text" name="option4" class="form-control" 
+                        value="{{ question.option4 }}" required 
+                        placeholder="Enter Option 4">
+                </div>
+            </div>
+
+            <!-- Correct Option -->
+            <div class="mb-3 mt-3">
+                <label for="correct_option" class="form-label fw-bold">Correct Option:</label>
+                <select name="correct_option" class="form-select" required>
+                    <option value="1" {% if question.correct_option == 1 %}selected{% endif %}>Option 1</option>
+                    <option value="2" {% if question.correct_option == 2 %}selected{% endif %}>Option 2</option>
+                    <option value="3" {% if question.correct_option == 3 %}selected{% endif %}>Option 3</option>
+                    <option value="4" {% if question.correct_option == 4 %}selected{% endif %}>Option 4</option>
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary btn-sm px-4 py-2">🔙 Cancel</a>
+                <button type="submit" class="btn btn-warning btn-sm px-4 py-2">✔ Update Question</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

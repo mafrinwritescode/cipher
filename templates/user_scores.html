@@ -1,0 +1,92 @@
+{% extends "user_base.html" %}
+
+{% block title %}📊 Past Quiz Scores{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">📊 Your Quiz Scores</h2>
+    
+    {% if scores %}
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th>📖 Quiz Name</th>
+                        <th>✅ Score</th>
+                        <th>⏳ Attempt Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for score in scores %}
+                    <tr class="text-center">
+                        <td>
+                            <a href="{{ url_for('quiz_summary', quiz_id=score.quiz_id) }}" class="text-decoration-none fw-bold">
+                                {{ score.quiz_name }}
+                            </a>
+                        </td>
+                        <td class="fw-bold">{{ score.total_scored }}</td>
+                        <td class="text-muted">{{ score.time_stamp_of_attempt }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Chart Section -->
+        <h3 class="text-center mt-5">📊 Score Overview</h3>
+        <canvas id="quizScoreChart"></canvas>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const ctx = document.getElementById('quizScoreChart').getContext('2d');
+
+                const quizLabels = {{ scores | map(attribute='quiz_name') | list | tojson }};
+                const quizScores = {{ scores | map(attribute='total_scored') | list | tojson }};
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: quizLabels,
+                        datasets: [{
+                            label: 'Quiz Scores',
+                            data: quizScores,
+                            backgroundColor: 'rgba(220, 20, 60, 0.85)',
+                            borderColor: 'rgba(139, 0, 0, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 10,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.3)'
+                                },
+                                ticks: {
+                                    color: '#8B0000'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#8B0000'
+                                }
+                                
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    {% else %}
+        <p class="text-center text-muted mt-3">🚫 You haven't attempted any quizzes yet.</p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('user_dashboard') }}" class="btn btn-outline-secondary">🔙 Back to Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">🚪 Logout</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "user_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Attempt Quiz - {{ quiz.date_of_quiz }}</h2>
+
+    <!-- Timer -->
+    <div id="timer" class="alert alert-info">Time Left: <span id="time-left">{{ quiz.time_duration }}</span> minutes</div>
+
+    <form id="quiz-form" action="{{ url_for('submit_quiz', quiz_id=quiz.id) }}" method="post">
+        {% for question in questions %}
+        <div class="card my-3">
+            <div class="card-body">
+                <p><strong>Q{{ loop.index }}:</strong> {{ question.question_statement }}</p>
+                <div>
+                    <input type="radio" name="q{{ question.id }}" value="1"> {{ question.option1 }} <br>
+                    <input type="radio" name="q{{ question.id }}" value="2"> {{ question.option2 }} <br>
+                    <input type="radio" name="q{{ question.id }}" value="3"> {{ question.option3 }} <br>
+                    <input type="radio" name="q{{ question.id }}" value="4"> {{ question.option4 }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Submit Quiz</button>
+    </form>
+</div>
+
+<!-- Timer Script -->
+<script>
+    let timeLeft = parseInt(document.getElementById("time-left").innerText) * 60; // Convert minutes to seconds
+    function updateTimer() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById("time-left").innerText = minutes + "m " + seconds + "s";
+        
+        if (timeLeft <= 0) {
+            alert("Time is up! Submitting the quiz.");
+            document.getElementById("quiz-form").submit();
+        } else {
+            timeLeft--;
+            setTimeout(updateTimer, 1000);
+        }
+    }
+    updateTimer();
+</script>
+
+{% endblock %}

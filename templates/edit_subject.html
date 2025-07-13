@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Subject</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            background: url("{{ url_for('static', filename='admin.jpg') }}") no-repeat center center/cover;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #34495e;
+        }
+
+        .btn-custom {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-success {
+            background: #16a085;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background: #13876c;
+        }
+
+        .btn-secondary {
+            background: #7f8c8d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #5e6d6f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Edit Subject</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Subject Name</label>
+                <input type="text" name="name" class="form-control" value="{{ subject.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3">{{ subject.description }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-success btn-custom">Update Subject</button>
+            <a href="{{ url_for('admin_subjects') }}" class="btn btn-secondary btn-custom mt-2">Cancel</a>
+        </form>
+    </div>
+
+</body>
+</html>

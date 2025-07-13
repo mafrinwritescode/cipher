@@ -1,0 +1,58 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<div class="container p-4">
+    <h2 class="text-center text-primary">📖 Manage Chapters for {{ subject.name }}</h2>
+
+    <!-- Add Chapter Form -->
+    <div class="card shadow-sm p-4 mb-4">
+        <h4 class="text-success">➕ Add a New Chapter</h4>
+        <form action="{{ url_for('add_chapter', subject_id=subject.id) }}" method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Chapter Name:</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter chapter name" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <input type="text" name="description" class="form-control" placeholder="Enter description (optional)">
+            </div>
+            <button type="submit" class="btn btn-success w-100">Add Chapter</button>
+        </form>
+    </div>
+
+    <!-- List of Chapters -->
+    <div class="card shadow-sm p-4">
+        <h4 class="text-dark">📚 Existing Chapters</h4>
+        {% if chapters %}
+        <ul class="list-group list-group-flush">
+            {% for chapter in chapters %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ chapter.name }}</strong> - {{ chapter.description }}
+                </div>
+                <div>
+                    <!-- Edit Chapter Form -->
+                    <form action="{{ url_for('edit_chapter', chapter_id=chapter.id) }}" method="POST" class="d-inline">
+                        <input type="text" name="name" placeholder="New Name" class="form-control form-control-sm d-inline-block" style="width: 120px;" required>
+                        <input type="text" name="description" placeholder="New Description" class="form-control form-control-sm d-inline-block" style="width: 150px;">
+                        <button type="submit" class="btn btn-warning btn-sm">✏ Edit</button>
+                    </form>
+
+                    <!-- Delete Chapter -->
+                    <form action="{{ url_for('delete_chapter', chapter_id=chapter.id, subject_id=subject.id) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">🗑 Delete</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No chapters added yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">🔙 Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

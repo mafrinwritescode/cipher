@@ -1,0 +1,36 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Quiz</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="chapter_id" class="form-label">Chapter</label>
+            <select name="chapter_id" class="form-control">
+                {% for chapter in chapters %}
+                <option value="{{ chapter.id }}" {% if quiz.chapter_id == chapter.id %}selected{% endif %}>
+                    {{ chapter.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="date_of_quiz" class="form-label">Date of Quiz</label>
+            <input type="date" name="date_of_quiz" class="form-control" value="{{ quiz.date_of_quiz }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="time_duration" class="form-label">Time Duration (minutes)</label>
+            <input type="number" name="time_duration" class="form-control" value="{{ quiz.time_duration or 30 }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="remarks" class="form-label">Remarks</label>
+            <textarea name="remarks" class="form-control">{{ quiz.remarks or '' }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Update Quiz</button>
+    </form>
+</div>
+{% endblock %}

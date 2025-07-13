@@ -1,0 +1,34 @@
+{% extends "user_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Quiz Summary Report</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>Total Subject- Quizzes Attempted</th>
+            <td>{{ summary.total_quizzes if summary.total_quizzes else 0 }}</td>
+        </tr>
+        <tr>
+
+            <th>Total Score</th>
+            <td>{{ summary.total_score if summary.total_score else 0 }}</td>
+        </tr>
+        <tr>
+            <th>Average Score</th>
+            <td>{{ "%.2f"|format(summary.avg_score) if summary.avg_score else 0 }}</td>
+        </tr>
+    </table>
+
+    <h3>Best & Worst Quiz Performance</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Best Quiz</th>
+            <td>{{ best_quiz.quiz_name if best_quiz else "N/A" }} ({{ best_quiz.total_scored if best_quiz else "N/A" }})</td>
+        </tr>
+        <tr>
+            <th>Worst Quiz</th>
+            <td>{{ worst_quiz.quiz_name if worst_quiz else "N/A" }} ({{ worst_quiz.total_scored if worst_quiz else "N/A" }})</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

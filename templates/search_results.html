@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Search Results for "{{ query }}"</h2>
+
+{% if role == "admin" %}
+    <h3>Users</h3>
+    <table class="table">
+        <tr><th>ID</th><th>Name</th><th>Email</th></tr>
+        {% for user in results.users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+<h3>Subjects</h3>
+<table class="table">
+    <tr><th>ID</th><th>Name</th></tr>
+    {% for subject in results.subjects %}
+    <tr>
+        <td>{{ subject.id }}</td>
+        <td>{{ subject.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Quizzes</h3>
+<table class="table">
+    <tr><th>Quiz ID</th><th>Chapter Name</th></tr>
+    {% for quiz in results.quizzes %}
+    <tr>
+        <td>{{ quiz.id }}</td>
+        <td>{{ quiz.chapter_name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if role == "admin" %}
+    <h3>Questions</h3>
+    <table class="table">
+        <tr><th>Question ID</th><th>Quiz ID</th><th>Question</th></tr>
+        {% for question in results.questions %}
+        <tr>
+            <td>{{ question.id }}</td>
+            <td>{{ question.quiz_id }}</td>
+            <td>{{ question.question_statement }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% if not results.users and not results.subjects and not results.quizzes and not results.questions %}
+    <p>No results found.</p>
+{% endif %}
+
+{% endblock %}

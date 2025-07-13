@@ -1,0 +1,16 @@
+<form method="POST" action="{{ url_for('add_quiz') }}">
+  <label>Chapter:</label>
+  <select name="chapter_id" required>
+      {% for chapter in chapters %}
+          <option value="{{ chapter.id }}">{{ chapter.name }}</option>
+      {% endfor %}
+  </select>
+
+  <label>Date of Quiz:</label>
+  <input type="date" name="date_of_quiz" required>
+
+  <label>Time Duration (HH:MM):</label>
+  <input type="text" name="time_duration" placeholder="00:30" required>
+
+  <button type="submit">Create Quiz</button>
+</form>

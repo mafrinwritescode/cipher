@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Cipher</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        
+/*  Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    background: url("{{ url_for('static', filename='register.jpg') }}") no-repeat center center/cover;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+h2 {
+    font-weight: 600;
+    color: #5A1A2B; /* Darker text */
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    color: #333; /* Dark text */
+    font-weight: 500;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    color: #222; /* Dark text */
+    font-size: 14px;
+}
+
+.form-control::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.form-control:focus {
+    box-shadow: 0px 0px 8px rgba(139, 28, 46, 0.8);
+    background: rgba(255, 255, 255, 1);
+    outline: none;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #8B1C2E, #E63946);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-login:hover {
+    box-shadow: 0px 0px 12px rgba(139, 28, 46, 0.9);
+    transform: scale(1.02);
+}
+
+.register-link {
+    margin-top: 10px;
+}
+
+.register-link a {
+    color: #8B1C2E;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="email" name="username" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+    </form>
+    <p class="register-link">
+        <a href="{{ url_for('register') }}">New user? Register here</a>
+    </p>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

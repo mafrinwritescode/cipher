@@ -1,0 +1,41 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<h2>Search Results for "{{ query }}"</h2>
+
+<h3>Users</h3>
+<ul>
+    {% for user in users %}
+        <li>{{ user.username }} - {{ user.email }}</li>
+    {% else %}
+        <li>No users found.</li>
+    {% endfor %}
+</ul>
+
+<h3>Subjects</h3>
+<ul>
+    {% for subject in subjects %}
+        <li>{{ subject.name }}</li>
+    {% else %}
+        <li>No subjects found.</li>
+    {% endfor %}
+</ul>
+
+<h3>Quizzes</h3>
+<ul>
+    {% for quiz in quizzes %}
+        <li>Chapter: {{ quiz.chapter_name }}, Date: {{ quiz.date_of_quiz }}</li>
+    {% else %}
+        <li>No quizzes found.</li>
+    {% endfor %}
+</ul>
+
+<h3>Questions</h3>
+<ul>
+    {% for question in questions %}
+        <li>{{ question.question_statement }}</li>
+    {% else %}
+        <li>No questions found.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

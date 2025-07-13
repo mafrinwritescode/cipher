@@ -1,0 +1,42 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="bg-white p-4 shadow rounded">
+        <h4 class="mb-3 text-primary">📝 Add New Quiz</h4>
+
+        <form method="POST" action="{{ url_for('admin_add_quiz') }}">
+            <div class="mb-3">
+                <label for="chapter_id" class="form-label fw-bold">📖 Select Chapter:</label>
+                <select name="chapter_id" class="form-select border-primary" required>
+                    <option value="" disabled selected>-- Choose a Chapter --</option>
+                    {% for chapter in chapters %}
+                    <option value="{{ chapter.id }}">{{ chapter.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="date_of_quiz" class="form-label fw-bold">📅 Date:</label>
+                <input type="date" name="date_of_quiz" class="form-control border-primary" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="time_duration" class="form-label fw-bold">⏳ Duration (in minutes):</label>
+                <input type="number" name="time_duration" class="form-control border-primary" placeholder="e.g., 30" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="remarks" class="form-label fw-bold">🗒 Remarks (Optional):</label>
+                <input type="text" name="remarks" class="form-control border-secondary" placeholder="Additional notes">
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 fw-bold">✅ Add Quiz</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">🔙 Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

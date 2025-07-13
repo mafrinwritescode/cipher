@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Subjects</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='admin.jpg') }}") no-repeat center center/cover;
+            /* background: #f4f7fc; */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+            margin-top: 30px;
+        }
+
+        h2 {
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #dee2e6;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .table th, .table td {
+            padding: 14px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table-hover tbody tr:hover {
+            background: rgba(0, 123, 255, 0.1);
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn {
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #28a745, #218838);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #218838, #1e7e34);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107, #e0a800);
+            border: none;
+            color: black;
+        }
+
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #e0a800, #d39e00);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545, #a71d2a);
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #a71d2a, #721c24);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #495057, #343a40);
+        }
+
+        .text-end {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">📚 Manage Subjects</h2>
+
+        <div class="text-end">
+            <a href="{{ url_for('add_subject') }}" class="btn btn-primary">+ Add Subject</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject in subjects %}
+                    <tr>
+                        <td>{{ subject.id }}</td>
+                        <td>{{ subject.name }}</td>
+                        <td>{{ subject.description }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_subject', id=subject.id) }}" class="btn btn-warning btn-sm">✏ Edit</a>
+                            <a href="{{ url_for('delete_subject', id=subject.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">🔙 Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

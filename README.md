@@ -1,6 +1,6 @@
-Cipher - Multi-User Exam Preparation Platform
+# Cipher - Multi-User Exam Preparation Platform
 
-Table of Contents
+## Table of Contents
 
 Project Overview
 Features
@@ -11,11 +11,11 @@ Project Structure
 Dependencies
 Contributors
 
-Project Overview
+## Project Overview
 Cipher is a multi-user web application designed to help users prepare for exams. It allows admins to manage subjects, quizzes, and users, while users can attempt quizzes, track their scores, and review performance.
 
-Features
-✅ Admin Features:
+## Features
+### ✅ Admin Features:
 Create, edit, and delete subjects, quizzes, and questions.
 
 Manage user accounts.
@@ -24,19 +24,19 @@ View summary charts of quizzes and users.
 
 Search functionality for users, subjects, quizzes, and questions.
 
-✅ User Features:
+### ✅ User Features:
 Register, log in, and attempt quizzes.
 
 Track past quiz attempts and scores.
 
 View quiz results and performance analytics.
 
-✅ Additional Features:
+### ✅ Additional Features:
 Timer functionality for quizzes.
 
 Responsive and user-friendly Bootstrap-based UI.
 
-Installation
+## Installation
 🔹 Step 1: Clone the Repository
 ```
 git clone https://github.com/23f2001933/cipher.git
@@ -52,7 +52,7 @@ venv\Scripts\activate  # On Windows
 ```
 pip install -r requirements.txt
 ```
-Running the Application
+## Running the Application
 🔹 Step 1: Set Environment Variables (Optional)
 ```
 export FLASK_APP=app.py
@@ -65,10 +65,11 @@ flask run
 ```
 By default, the app runs on http://127.0.0.1:5000/.
 
-Database Initialization
+## Database Initialization
 To initialize the SQLite database, run:
 
-python database.py
+```python database.py```
+
 This will create necessary tables and populate them with default admin credentials.
 
 Admin Login Credentials:
@@ -77,7 +78,7 @@ Username: admin@gmail.com
 
 Password: admin123
 
-Project Structure
+## Project Structure
 ```
 /cipher
 │── /static              # CSS, JavaScript, Images
@@ -88,13 +89,13 @@ Project Structure
 │── README.md            # Project Documentation
 │── requirements.txt     # Python Dependencies
 ```
-Dependencies
+## Dependencies
 To install all dependencies, run:
 ```
 pip install -r requirements.txt
 ```
 
-Main dependencies:
+## Main dependencies:
 
 Flask
 
@@ -107,8 +108,11 @@ Flask-SQLAlchemy
 SQLite
 
 
-CONTRIBUTORS
+## CONTRIBUTORS
 ```
 MAFRIN S
 23f2001933@ds.study.iitm.ac.in
 ```
+=======
+## CIPHER
+A multi-user exam preparation platform built using Flask, Jinja2, Bootstrap, and SQLite.
